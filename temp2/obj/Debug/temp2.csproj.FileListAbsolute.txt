@@ -1,0 +1,9 @@
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\bin\Debug\temp2.exe
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\bin\Debug\temp2.pdb
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\ResolveAssemblyReference.cache
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\temp2.csproj.GenerateResource.Cache
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\temp2.exe
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\temp2.pdb
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\Screen_Grab.Form1.resources
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\Screen_Grab.Form2.resources
+C:\TARSEM_DATA\LAS_Project\temp\temp2\temp2\obj\Debug\Screen_Grab.Properties.Resources.resources
