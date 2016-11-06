@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>System-Web-Helpers.dll</id>
+    <version>1.0.0</version>
+    <title>System Web Helpers Package</title>
+    <authors>gyand</authors>
+    <owners>gyand</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple nuget package to allow System.Web.Helpers to be included in a project</description>
+    <summary />
+    <releaseNotes>A way to get system.web.helpers in projects.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>mvc helpers</tags>
+  </metadata>
+</package>
