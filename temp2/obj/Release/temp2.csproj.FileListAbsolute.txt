@@ -13,3 +13,13 @@ C:\Users\dave\Desktop\temp2\temp2\obj\Release\temp2.csprojResolveAssemblyReferen
 C:\Users\dave\Desktop\temp2\temp2\bin\Release\System.Web.Helpers.dll
 C:\Users\dave\Desktop\temp2\temp2\bin\Release\Newtonsoft.Json.dll
 C:\Users\dave\Desktop\temp2\temp2\bin\Release\Newtonsoft.Json.xml
+C:\Users\dave\Documents\GitHub\Snap\temp2\bin\Release\temp2.exe.config
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\temp2.exe
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\temp2.pdb
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\temp2.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Form1.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Form2.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Options.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Preview.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Properties.Resources.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\temp2.csproj.GenerateResource.Cache

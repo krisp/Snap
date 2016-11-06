@@ -84,12 +84,18 @@ namespace Screen_Grab
                             {"image", Convert.ToBase64String(ms.ToArray())}                            
                         };
 
-
-                        string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("image", "POST", vals));
-                        imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
-                        var d = rd.data;
-                        Clipboard.SetText(d.link);
-                        this.Close();
+                        try
+                        {
+                            string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("image", "POST", vals));
+                            imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
+                            var d = rd.data;
+                            Clipboard.SetText(d.link);
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Upload failed: " + ex.Message);
+                        }                        
                     }
                     break;
 
@@ -104,13 +110,18 @@ namespace Screen_Grab
                             {"type", "base64"},
                             {"data", Convert.ToBase64String(ms.ToArray())}                            
                         };
-
-
-                        string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("media", "POST", vals));
-                        imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
-                        var d = rd.data;
-                        Clipboard.SetText(d.link);
-                        this.Close();
+                        try
+                        {
+                            string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("media", "POST", vals));
+                            imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
+                            var d = rd.data;
+                            Clipboard.SetText(d.link);
+                            this.Close();
+                        } 
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Upload failed: " + ex.Message);
+                        }
                     }
                     break;
 

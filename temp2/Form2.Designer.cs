@@ -28,7 +28,7 @@ namespace Screen_Grab
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnOptions = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -65,16 +65,16 @@ namespace Screen_Grab
             this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.grabALL_Click);
             // 
-            // button5
+            // btnOptions
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.button5.Location = new System.Drawing.Point(225, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(105, 41);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Options";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnOptions.Location = new System.Drawing.Point(225, 3);
+            this.btnOptions.Name = "btnOptions";
+            this.btnOptions.Size = new System.Drawing.Size(105, 41);
+            this.btnOptions.TabIndex = 4;
+            this.btnOptions.Text = "Options";
+            this.btnOptions.UseVisualStyleBackColor = true;
+            this.btnOptions.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form2
             // 
@@ -82,7 +82,7 @@ namespace Screen_Grab
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(334, 48);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -105,6 +105,6 @@ namespace Screen_Grab
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnOptions;
     }
 }

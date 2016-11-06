@@ -62,16 +62,8 @@ namespace Screen_Grab
         {
             for (int j = 0; j < noofscreens; j++) { grabwindow[j].Close(); grabwindow[j].Dispose(); }
             capture_class.CaptureScreentoClipboard(screens[sc].Bounds.X, screens[sc].Bounds.Y,screens[sc].Bounds.Width, screens[sc].Bounds.Height);
-            if (Options.isPreviewEnabled())
-            {
-                Preview p = new Preview(this);
-                p.Show();
-            }
-            else
-            {
-                this.Visible = true;
-            }
-            //this.Visible = true;  //make your original window visible
+            Preview p = new Preview(this);
+            p.Show();
         }
         public void smallscreengrab(int sc, int x, int y, int x1, int y1) // grab part of screen
         {
@@ -83,16 +75,8 @@ namespace Screen_Grab
             finalwidth = X2 - X1 + 1;
             finalheight = Y2 - Y1 + 1;
             capture_class.CaptureScreentoClipboard(finalx, finaly, finalwidth, finalheight);
-            if (Options.isPreviewEnabled())
-            {
-                Preview p = new Preview(this);
-                p.Show();
-            }
-            else
-            {
-                this.Visible = true;
-            }
-  
+            Preview p = new Preview(this);
+            p.Show();
         }
         public void Form2_Closing(object sender, CancelEventArgs e)
         {
