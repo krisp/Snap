@@ -72,7 +72,7 @@ namespace Screen_Grab
 
             ToolStripItem y = new ToolStripMenuItem("Custom...");
             y.Click += new System.EventHandler(y_Click);
-            penMenu.DropDownItems.Add(y);
+            tsddColors.DropDownItems.Add(y);
             penColor = Properties.Settings.Default.penColor;
             penSize = Properties.Settings.Default.penSize;
 
@@ -96,6 +96,7 @@ namespace Screen_Grab
         void x_Click(object sender, EventArgs e)
         {           
             penColor = Color.FromName(sender.ToString());
+            tsDraw.Checked = true;
             redrawColorMenu();
             drawObfuscate = true;
             pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -114,8 +115,9 @@ namespace Screen_Grab
             if (c.ShowDialog() == DialogResult.OK)
             {
                 penColor = c.Color;
-                penMenu.Text = "Pen: Custom";
+                redrawColorMenu();
                 drawObfuscate = true;
+                tsDraw.Checked = true;
                 pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
             }            
         }
