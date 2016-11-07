@@ -94,12 +94,20 @@ namespace Screen_Grab
                 Rectangle r = new Rectangle(0, 0, 32, 32);
                 g.FillRectangle(new SolidBrush(penColor), r);
                 g.DrawRectangle(Pens.Transparent, r);
-            }
+            }            
             tsddColors.Invalidate();
+            redrawSizeMenu();
         }
 
         void redrawSizeMenu()
         {
+            foreach (ToolStripMenuItem i in tsddSize.DropDownItems)
+            {
+                i.Image = new Bitmap(32, 32);
+                using (Graphics g = Graphics.FromImage(i.Image))
+                    g.DrawLine(new Pen(penColor, int.Parse(i.Text)), new Point(8, 16), new Point(24, 16));
+                i.Invalidate();
+            }
             tsddSize.Image = new Bitmap(32, 32);
             using (Graphics g = Graphics.FromImage(tsddSize.Image))
                 g.DrawLine(new Pen(penColor, penSize), new Point(8, 16), new Point(24, 16));       
