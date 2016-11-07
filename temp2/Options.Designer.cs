@@ -110,6 +110,7 @@
             // rbSlimg
             // 
             this.rbSlimg.AutoSize = true;
+            this.rbSlimg.Enabled = false;
             this.rbSlimg.Location = new System.Drawing.Point(14, 20);
             this.rbSlimg.Name = "rbSlimg";
             this.rbSlimg.Size = new System.Drawing.Size(51, 17);
@@ -121,6 +122,7 @@
             // cbUploadEnabled
             // 
             this.cbUploadEnabled.AutoSize = true;
+            this.cbUploadEnabled.Enabled = false;
             this.cbUploadEnabled.Location = new System.Drawing.Point(13, 19);
             this.cbUploadEnabled.Name = "cbUploadEnabled";
             this.cbUploadEnabled.Size = new System.Drawing.Size(65, 17);

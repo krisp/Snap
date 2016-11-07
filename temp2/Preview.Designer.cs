@@ -35,6 +35,7 @@
             this.drawObfuscationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelESCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbUpload = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pbImg)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -98,11 +99,20 @@
             this.cancelESCToolStripMenuItem.Text = "Cancel (ESC)";
             this.cancelESCToolStripMenuItem.Click += new System.EventHandler(this.cancelESCToolStripMenuItem_Click);
             // 
+            // pbUpload
+            // 
+            this.pbUpload.Location = new System.Drawing.Point(0, 27);
+            this.pbUpload.Name = "pbUpload";
+            this.pbUpload.Size = new System.Drawing.Size(204, 23);
+            this.pbUpload.TabIndex = 2;
+            this.pbUpload.Visible = false;
+            // 
             // Preview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 480);
+            this.Controls.Add(this.pbUpload);
             this.Controls.Add(this.pbImg);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -129,5 +139,6 @@
         private System.Windows.Forms.ToolStripMenuItem cancelESCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drawObfuscationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem penMenu;
+        private System.Windows.Forms.ProgressBar pbUpload;
     }
 }

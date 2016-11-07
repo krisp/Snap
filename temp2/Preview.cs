@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.IO;
 using System.Collections.Specialized;
 using System.Net;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 
@@ -22,6 +14,7 @@ namespace Screen_Grab
         private Form2 parent;
         private bool drawObfuscate = false;
         private bool drawing = false;
+        private bool hasDrawn = false;
         private Point lastPoint;
         private Color penColor = Color.Black;
 
@@ -50,7 +43,10 @@ namespace Screen_Grab
             int[] pensizes = { 1, 2, 4, 6, 8, 10, 14, 20 };
             pbImg.Image = Clipboard.GetImage();
             pbImg.Size = Clipboard.GetImage().Size;
-            this.Size = new Size(pbImg.Size.Width + 20 , pbImg.Size.Height + 70);
+
+            this.Size = new Size(400, pbImg.Size.Height + 70);
+            if(pbImg.Size.Width > 400)
+                this.Size = new Size(pbImg.Size.Width + 20 , (pbImg.Size.Height < 900) ? pbImg.Size.Height + 70 : 970);
 
             foreach (var color in colorsilike)
             {
@@ -72,6 +68,8 @@ namespace Screen_Grab
             {
                 penMenu.Text = "Pen: Custom";
             }
+
+            pbUpload.Maximum = 100;
         }
 
         void x_Click(object sender, EventArgs e)
@@ -118,70 +116,98 @@ namespace Screen_Grab
             }
         }
 
+        private void onUploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
+        {
+            /*
+            if (e.ProgressPercentage >= pbUpload.Minimum && e.ProgressPercentage <= pbUpload.Maximum)
+                pbUpload.Value = (int)e.BytesSent;
+            else
+               pbUpload.Value = 100;
+             */
+            try
+            {
+                pbUpload.Maximum = (int)e.TotalBytesToSend/1000;
+                pbUpload.Value = (int)e.BytesSent/1000;
+            } catch {
+
+            }
+        }
+
+        private void onUploadValuesCompleted(object sender, UploadValuesCompletedEventArgs e)
+        {
+            try
+            {
+                imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(System.Text.Encoding.UTF8.GetString(e.Result));
+                var d = rd.data;
+                Clipboard.SetText(d.link);
+                parent.Text = "Snap (" + d.link + ")";
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error decoding link: " + ex.Message);
+            }
+        }
+
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {            
             MemoryStream ms = new MemoryStream();
             pbImg.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-
-            switch (Options.getImgProvider())
+            using (var w = new WebClient())
             {
-                case (int)Options.ImgProviders.imgur:
-                    using (var w = new WebClient())
-                    {
+                NameValueCollection vals;
+                w.UploadProgressChanged += new UploadProgressChangedEventHandler(this.onUploadProgressChanged);
+                w.UploadValuesCompleted += new UploadValuesCompletedEventHandler(this.onUploadValuesCompleted);
+
+                switch (Options.getImgProvider())
+                {
+                    case (int)Options.ImgProviders.imgur:
+
                         w.Headers.Add("Authorization", "Client-ID f86b75e23f8ae3b");
                         w.BaseAddress = "https://api.imgur.com/3/";
-            
-                        var vals = new NameValueCollection
-                        {
-                            {"type", "base64"},
-                            {"image", Convert.ToBase64String(ms.ToArray())}                            
-                        };
+
+                        vals = new NameValueCollection
+                            {
+                                {"type", "base64"},
+                                {"image", Convert.ToBase64String(ms.ToArray())}                            
+                            };
 
                         try
-                        {
-                            string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("image", "POST", vals));
-                            imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
-                            var d = rd.data;
-                            Clipboard.SetText(d.link);
-                            this.Close();
+                        {                      
+                            w.UploadValuesAsync(new Uri("https://api.imgur.com/3/image"), "POST", vals);
+                            pbUpload.Visible = true;
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Upload failed: " + ex.Message);
-                        }                        
-                    }
-                    break;
+                        }
+                        break;
 
-                case (int)Options.ImgProviders.slimg:
-                    using (var w = new WebClient())
-                    {
+                    case (int)Options.ImgProviders.slimg:
+
                         w.Headers.Add("Authorization", "Client-ID GNoTWNo5C4sZiixLREjWx6ijiu2alxK2");
                         w.BaseAddress = "https://api.sli.mg/";
-            
-                        var vals = new NameValueCollection
+
+                        vals = new NameValueCollection
                         {
                             {"type", "base64"},
                             {"data", Convert.ToBase64String(ms.ToArray())}                            
                         };
                         try
                         {
-                            string response = System.Text.Encoding.UTF8.GetString(w.UploadValues("media", "POST", vals));
-                            imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
-                            var d = rd.data;
-                            Clipboard.SetText(d.link);
-                            this.Close();
-                        } 
+                            w.UploadValuesAsync(new Uri("https://api.imgur.com/3/image"), "POST", vals);
+                            pbUpload.Visible = true;
+                        }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Upload failed: " + ex.Message);
                         }
-                    }
-                    break;
 
-                case (int)Options.ImgProviders.webdav:
-                    using (var w = new WebClient())
-                    {                       
-                        var vals = new NameValueCollection
+                        break;
+
+                    case (int)Options.ImgProviders.webdav:
+
+                        vals = new NameValueCollection
                         {
                             {"type", "base64"},
                             {"data", Convert.ToBase64String(ms.ToArray())}                            
@@ -189,18 +215,16 @@ namespace Screen_Grab
 
                         try
                         {
-                            string response = System.Text.Encoding.UTF8.GetString(w.UploadValues(Options.getAPIkey(), "POST", vals));
-                            imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(response);
-                            var d = rd.data;
-                            Clipboard.SetText(d.link);
-                            this.Close();
+                            w.UploadValuesAsync(new Uri("https://api.imgur.com/3/image"), "POST", vals);
+                            pbUpload.Visible = true;
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Exception trying to upload: " + ex.Message);
                         }
-                    }
-                    break;
+
+                        break;
+                }
             }
             //this.Close();
         }
@@ -232,10 +256,12 @@ namespace Screen_Grab
 
         private void pbImg_MouseDown(object sender, MouseEventArgs e)
         {
-            if(drawObfuscate && e.Button == MouseButtons.Left)
+            if((drawObfuscate || hasDrawn) && e.Button == MouseButtons.Left)
             {
+                hasDrawn = true;
                 lastPoint = e.Location;                
-                drawing = true;                
+                drawing = true;
+                pbImg.Cursor = Cursors.Hand;
             }
         }
 
