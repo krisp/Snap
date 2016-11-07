@@ -42,9 +42,12 @@ namespace Screen_Grab
         private void Preview_Load(object sender, EventArgs e)
         {
             string[] colorsilike = {"Black","Red","Blue","Yellow","Green","Orange","Purple","Gray"};
-            int[] pensizes = { 1, 2, 4, 6, 8, 10, 14, 20 };
+            int[] pensizes = { 1, 2, 4, 6, 8, 10, 12, 14, 18, 20, 36};
             pbImg.Image = Clipboard.GetImage();
             pbImg.Size = Clipboard.GetImage().Size;
+
+            penColor = Properties.Settings.Default.penColor;
+            penSize = Properties.Settings.Default.penSize;
 
             this.Size = new Size(400, pbImg.Size.Height + 70);
             if(pbImg.Size.Width > 400)
@@ -66,18 +69,20 @@ namespace Screen_Grab
             foreach (var size in pensizes)
             {
                 ToolStripMenuItem x = new ToolStripMenuItem(size.ToString());
+                x.Image = new Bitmap(32, 32);
                 x.Click += new System.EventHandler(size_Click);
+                using (Graphics g = Graphics.FromImage(x.Image))                
+                    g.DrawLine(new Pen(penColor, size), new Point(8,16), new Point(24,16));                                
                 tsddSize.DropDownItems.Add(x);
             }
 
             ToolStripItem y = new ToolStripMenuItem("Custom...");
             y.Click += new System.EventHandler(y_Click);
             tsddColors.DropDownItems.Add(y);
-            penColor = Properties.Settings.Default.penColor;
-            penSize = Properties.Settings.Default.penSize;
 
             tsddSize.Text = "Size: " + penSize.ToString();
             redrawColorMenu();
+            redrawSizeMenu();
 
         }
 
@@ -90,6 +95,14 @@ namespace Screen_Grab
                 g.FillRectangle(new SolidBrush(penColor), r);
                 g.DrawRectangle(Pens.Transparent, r);
             }
+            tsddColors.Invalidate();
+        }
+
+        void redrawSizeMenu()
+        {
+            tsddSize.Image = new Bitmap(32, 32);
+            using (Graphics g = Graphics.FromImage(tsddSize.Image))
+                g.DrawLine(new Pen(penColor, penSize), new Point(8, 16), new Point(24, 16));       
             tsddColors.Invalidate();
         }
 
@@ -106,6 +119,7 @@ namespace Screen_Grab
         {
             tsddSize.Text = "Size: " + sender.ToString();
             penSize = int.Parse(sender.ToString());
+            redrawSizeMenu();
         }
 
         void y_Click(object sender, EventArgs e)

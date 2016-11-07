@@ -177,7 +177,6 @@
             // 
             // tsddSize
             // 
-            this.tsddSize.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tsddSize.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsddSize.Name = "tsddSize";
             this.tsddSize.Size = new System.Drawing.Size(40, 22);
