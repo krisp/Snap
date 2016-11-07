@@ -12,10 +12,12 @@ namespace Screen_Grab
     public partial class Options : Form
     {
         public enum ImgProviders { slimg=0, imgur=1, webdav=2 };
-        private int imgProvider; 
+        private int imgProvider;
+        private Form2 parent;
 
-        public Options()
+        public Options(Form2 _parent)
         {
+            this.parent = _parent;
             InitializeComponent();
         }
 
@@ -46,11 +48,7 @@ namespace Screen_Grab
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.uploadEnabled = cbUploadEnabled.Checked;
-            Properties.Settings.Default.apikey = tbAPIkey.Text;
-            Properties.Settings.Default.preview = true;
-            Properties.Settings.Default.provider = imgProvider;
-            Properties.Settings.Default.Save();
+            saveSettings();
             this.Close();
         }
 
@@ -81,6 +79,21 @@ namespace Screen_Grab
         private void rbWebDav_CheckedChanged(object sender, EventArgs e)
         {
             imgProvider = (int)ImgProviders.webdav;
+        }
+
+        private void Options_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            saveSettings();
+            this.parent.Show();
+        }
+
+        private void saveSettings()
+        {
+            Properties.Settings.Default.uploadEnabled = cbUploadEnabled.Checked;
+            Properties.Settings.Default.apikey = tbAPIkey.Text;
+            Properties.Settings.Default.preview = true;
+            Properties.Settings.Default.provider = imgProvider;
+            Properties.Settings.Default.Save();
         }
     }
 }

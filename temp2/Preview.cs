@@ -20,6 +20,9 @@ namespace Screen_Grab
     public partial class Preview : Form
     {
         private Form2 parent;
+        private bool drawObfuscate = false;
+        private bool drawing = false;
+        private Point lastPoint;
         
         public Preview(Form2 p)
         {
@@ -156,6 +159,7 @@ namespace Screen_Grab
         {
             SaveFileDialog dlg = new SaveFileDialog();            
             dlg.DefaultExt = ".png"; // Default file extension
+            dlg.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff|Wmf Image (.wmf)|*.wmf";
             dlg.Filter = "Portable Network Graphics (.png)|*.png"; // Filter files by extension
 
             // Show save file dialog box
@@ -168,6 +172,45 @@ namespace Screen_Grab
                 this.Close();
             }
         }
+
+        private void drawObfuscationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            drawObfuscate = true;            
+            pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
+        }
+
+        private void pbImg_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(drawObfuscate && e.Button == MouseButtons.Left)
+            {
+                lastPoint = e.Location;                
+                drawing = true;                
+            }
+        }
+
+        private void pbImg_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(drawing && lastPoint != null)
+            {
+                using (Graphics g = Graphics.FromImage(pbImg.Image))                          
+                    g.DrawLine(new Pen(Brushes.Black, 6), lastPoint, e.Location);
+                
+                pbImg.Invalidate();
+                lastPoint = e.Location;           
+            }
+        }
+
+        private void pbImg_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(drawing)
+            {
+                drawing = false;
+                drawObfuscate = false;
+                lastPoint = Point.Empty;
+                pbImg.Cursor = Cursors.Default;
+            }
+        }
+
     }
 
     public class imgurData

@@ -33,6 +33,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelESCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawObfuscationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbImg)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -44,13 +45,17 @@
             this.pbImg.Size = new System.Drawing.Size(526, 285);
             this.pbImg.TabIndex = 0;
             this.pbImg.TabStop = false;
+            this.pbImg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbImg_MouseDown);
+            this.pbImg.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbImg_MouseMove);
+            this.pbImg.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbImg_MouseUp);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.saveToDiskToolStripMenuItem,
-            this.cancelESCToolStripMenuItem});
+            this.cancelESCToolStripMenuItem,
+            this.drawObfuscationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -77,6 +82,13 @@
             this.cancelESCToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.cancelESCToolStripMenuItem.Text = "Cancel (ESC)";
             this.cancelESCToolStripMenuItem.Click += new System.EventHandler(this.cancelESCToolStripMenuItem_Click);
+            // 
+            // drawObfuscationToolStripMenuItem
+            // 
+            this.drawObfuscationToolStripMenuItem.Name = "drawObfuscationToolStripMenuItem";
+            this.drawObfuscationToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
+            this.drawObfuscationToolStripMenuItem.Text = "Draw Obfuscation";
+            this.drawObfuscationToolStripMenuItem.Click += new System.EventHandler(this.drawObfuscationToolStripMenuItem_Click);
             // 
             // Preview
             // 
@@ -107,5 +119,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem saveToDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelESCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem drawObfuscationToolStripMenuItem;
     }
 }

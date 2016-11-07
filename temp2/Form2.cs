@@ -133,8 +133,9 @@ namespace Screen_Grab
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Options o = new Options();
+            Options o = new Options(this);
             o.Show();
+            this.Hide();
         }
 
       
