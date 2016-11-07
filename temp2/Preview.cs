@@ -19,6 +19,7 @@ namespace Screen_Grab
         private Point lastPoint;
         private Color penColor = Color.Black;
         private int penSize = 6;
+        private Image originalImage;
 
         public Preview(Form2 p)
         {
@@ -43,8 +44,10 @@ namespace Screen_Grab
         {
             string[] colorsilike = {"Black","Red","Blue","Yellow","Green","Orange","Purple","Gray"};
             int[] pensizes = { 1, 2, 4, 6, 8, 10, 12, 14, 18, 20, 36};
+            
+            this.originalImage = Clipboard.GetImage();
             pbImg.Image = Clipboard.GetImage();
-            pbImg.Size = Clipboard.GetImage().Size;
+            pbImg.Size = Clipboard.GetImage().Size;            
 
             penColor = Properties.Settings.Default.penColor;
             penSize = Properties.Settings.Default.penSize;
@@ -341,6 +344,17 @@ namespace Screen_Grab
                 pbImg.Cursor = Cursors.Default;
                 tsDraw.Checked = false;
             }
+        }
+
+        private void tsLogReader_Click(object sender, EventArgs e)
+        {
+            var l = new LogForm();
+            l.Show();
+        }
+
+        private void tsClear_Click(object sender, EventArgs e)
+        {
+            pbImg.Image = (Image)originalImage.Clone();
         }
 
     }

@@ -8,3 +8,4 @@ C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Properties.Res
 C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Snap.csproj.GenerateResource.Cache
 C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\snap.exe
 C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\snap.pdb
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.LogForm.resources

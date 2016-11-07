@@ -32,13 +32,15 @@
             this.pbImg = new System.Windows.Forms.PictureBox();
             this.pbUpload = new System.Windows.Forms.ProgressBar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsUpload2 = new System.Windows.Forms.ToolStripButton();
             this.tsSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsDraw = new System.Windows.Forms.ToolStripButton();
             this.tsddColors = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsddSize = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsLogReader = new System.Windows.Forms.ToolStripButton();
+            this.tsClear = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbImg)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -65,23 +67,20 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator2,
             this.tsUpload2,
             this.tsSave,
             this.toolStripSeparator1,
             this.tsDraw,
             this.tsddColors,
-            this.tsddSize});
+            this.tsddSize,
+            this.tsClear,
+            this.toolStripSeparator2,
+            this.tsLogReader});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // tsUpload2
             // 
@@ -132,6 +131,31 @@
             this.tsddSize.Text = "Size";
             this.tsddSize.ToolTipText = "Size";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsLogReader
+            // 
+            this.tsLogReader.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsLogReader.Image = ((System.Drawing.Image)(resources.GetObject("tsLogReader.Image")));
+            this.tsLogReader.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsLogReader.Name = "tsLogReader";
+            this.tsLogReader.Size = new System.Drawing.Size(23, 22);
+            this.tsLogReader.ToolTipText = "Upload Log";
+            this.tsLogReader.Click += new System.EventHandler(this.tsLogReader_Click);
+            // 
+            // tsClear
+            // 
+            this.tsClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsClear.Image = ((System.Drawing.Image)(resources.GetObject("tsClear.Image")));
+            this.tsClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsClear.Name = "tsClear";
+            this.tsClear.Size = new System.Drawing.Size(23, 22);
+            this.tsClear.ToolTipText = "Clear changes";
+            this.tsClear.Click += new System.EventHandler(this.tsClear_Click);
+            // 
             // Preview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,5 +190,7 @@
         private System.Windows.Forms.ToolStripDropDownButton tsddColors;
         private System.Windows.Forms.ToolStripDropDownButton tsddSize;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton tsLogReader;
+        private System.Windows.Forms.ToolStripButton tsClear;
     }
 }
