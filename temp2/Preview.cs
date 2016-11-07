@@ -77,21 +77,26 @@ namespace Screen_Grab
             penSize = Properties.Settings.Default.penSize;
 
             tsddSize.Text = "Size: " + penSize.ToString();
+            redrawColorMenu();
 
+        }
+
+        void redrawColorMenu()
+        {
             tsddColors.Image = new Bitmap(32, 32);
-            using(Graphics g = Graphics.FromImage(tsddColors.Image))
+            using (Graphics g = Graphics.FromImage(tsddColors.Image))
             {
                 Rectangle r = new Rectangle(0, 0, 32, 32);
                 g.FillRectangle(new SolidBrush(penColor), r);
-                g.DrawRectangle(Pens.Transparent, r);                    
+                g.DrawRectangle(Pens.Transparent, r);
             }
             tsddColors.Invalidate();
         }
 
         void x_Click(object sender, EventArgs e)
-        {
-            penMenu.Text = "Pen: " + sender.ToString();
+        {           
             penColor = Color.FromName(sender.ToString());
+            redrawColorMenu();
             drawObfuscate = true;
             pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
         }
@@ -141,12 +146,6 @@ namespace Screen_Grab
 
         private void onUploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
-            /*
-            if (e.ProgressPercentage >= pbUpload.Minimum && e.ProgressPercentage <= pbUpload.Maximum)
-                pbUpload.Value = (int)e.BytesSent;
-            else
-               pbUpload.Value = 100;
-             */
             try
             {
                 pbUpload.Maximum = (int)e.TotalBytesToSend/1000;
