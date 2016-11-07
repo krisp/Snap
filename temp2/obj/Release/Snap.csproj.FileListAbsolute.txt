@@ -1,0 +1,10 @@
+C:\Users\dave\Documents\GitHub\Snap\temp2\bin\Release\snap.exe.config
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Snap.csprojResolveAssemblyReference.cache
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Form1.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Form2.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Options.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Preview.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Screen_Grab.Properties.Resources.resources
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\Snap.csproj.GenerateResource.Cache
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\snap.exe
+C:\Users\dave\Documents\GitHub\Snap\temp2\obj\Release\snap.pdb
