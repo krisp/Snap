@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Specialized;
 using System.Net;
+
 using Newtonsoft.Json;
 
 
@@ -17,6 +18,7 @@ namespace Screen_Grab
         private bool hasDrawn = false;
         private Point lastPoint;
         private Color penColor = Color.Black;
+        private int penSize = 6;
 
         public Preview(Form2 p)
         {
@@ -36,7 +38,7 @@ namespace Screen_Grab
                 this.AdjustFormScrollbars(false);
             }
         }
-
+        
         private void Preview_Load(object sender, EventArgs e)
         {
             string[] colorsilike = {"Black","Red","Blue","Yellow","Green","Orange","Purple","Gray"};
@@ -50,26 +52,40 @@ namespace Screen_Grab
 
             foreach (var color in colorsilike)
             {
-                ToolStripItem x = new ToolStripMenuItem(color);
+                ToolStripMenuItem x = new ToolStripMenuItem(color);
                 x.Click += new System.EventHandler(x_Click);
-                penMenu.DropDownItems.Add(x);
+                x.Image = new Bitmap(32, 32);
+                using (Graphics g = Graphics.FromImage(x.Image))
+                {
+                    Rectangle r = new Rectangle(0, 0, 32, 32);
+                    g.FillRectangle(new SolidBrush(Color.FromName(color)), r);
+                    g.DrawRectangle(Pens.Transparent, r);
+                }
+                tsddColors.DropDownItems.Add(x);
+            }
+            foreach (var size in pensizes)
+            {
+                ToolStripMenuItem x = new ToolStripMenuItem(size.ToString());
+                x.Click += new System.EventHandler(size_Click);
+                tsddSize.DropDownItems.Add(x);
             }
 
             ToolStripItem y = new ToolStripMenuItem("Custom...");
             y.Click += new System.EventHandler(y_Click);
             penMenu.DropDownItems.Add(y);
             penColor = Properties.Settings.Default.penColor;
+            penSize = Properties.Settings.Default.penSize;
 
-            if (penColor.IsNamedColor) 
-            {
-                penMenu.Text = "Pen: " + penColor.ToKnownColor().ToString();
-            }
-            else
-            {
-                penMenu.Text = "Pen: Custom";
-            }
+            tsddSize.Text = "Size: " + penSize.ToString();
 
-            pbUpload.Maximum = 100;
+            tsddColors.Image = new Bitmap(32, 32);
+            using(Graphics g = Graphics.FromImage(tsddColors.Image))
+            {
+                Rectangle r = new Rectangle(0, 0, 32, 32);
+                g.FillRectangle(new SolidBrush(penColor), r);
+                g.DrawRectangle(Pens.Transparent, r);                    
+            }
+            tsddColors.Invalidate();
         }
 
         void x_Click(object sender, EventArgs e)
@@ -78,6 +94,12 @@ namespace Screen_Grab
             penColor = Color.FromName(sender.ToString());
             drawObfuscate = true;
             pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
+        }
+
+        void size_Click(object sender, EventArgs e)
+        {
+            tsddSize.Text = "Size: " + sender.ToString();
+            penSize = int.Parse(sender.ToString());
         }
 
         void y_Click(object sender, EventArgs e)
@@ -96,6 +118,7 @@ namespace Screen_Grab
         private void Preview_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.penColor = penColor;
+            Properties.Settings.Default.penSize = penSize;
             Properties.Settings.Default.Save();
             parent.Visible = true;
         }
@@ -144,9 +167,8 @@ namespace Screen_Grab
                 var hashfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "delete_hashes.txt");
                 var output = "Link: " + d.link + " deletehash: https://imgur.com/delete/" + d.deletehash + "\r\n";
                 byte[] xz = System.Text.UTF8Encoding.UTF8.GetBytes(output);
-                using(var fd = new FileStream(hashfile, FileMode.Append)) {
-                    fd.Write(xz,0,xz.Length);
-                }
+                using(var fd = new FileStream(hashfile, FileMode.Append))
+                    fd.Write(xz,0,xz.Length);               
 
                 parent.Text = "Snap (" + d.link + ")";
                 this.Close();
@@ -257,7 +279,7 @@ namespace Screen_Grab
 
         private void drawObfuscationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            drawObfuscationToolStripMenuItem.Checked = true;
+            tsDraw.Checked = true;
             drawObfuscate = true;            
             pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
         }
@@ -270,6 +292,7 @@ namespace Screen_Grab
                 lastPoint = e.Location;                
                 drawing = true;
                 pbImg.Cursor = Cursors.Hand;
+                tsDraw.Checked = true;
             }
         }
 
@@ -278,8 +301,7 @@ namespace Screen_Grab
             if(drawing && lastPoint != null)
             {
                 using (Graphics g = Graphics.FromImage(pbImg.Image))                          
-                    g.DrawLine(new Pen(penColor, 6), lastPoint, e.Location);
-                
+                    g.DrawLine(new Pen(penColor, penSize), lastPoint, e.Location);                
                 pbImg.Invalidate();
                 lastPoint = e.Location;           
             }
@@ -294,6 +316,7 @@ namespace Screen_Grab
                 lastPoint = Point.Empty;
                 pbImg.Cursor = Cursors.Default;
                 drawObfuscationToolStripMenuItem.Checked = false;
+                tsDraw.Checked = false;
             }
         }
 

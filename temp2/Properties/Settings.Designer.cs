@@ -106,5 +106,17 @@ namespace Screen_Grab.Properties {
                 this["penColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
+        public int penSize {
+            get {
+                return ((int)(this["penSize"]));
+            }
+            set {
+                this["penSize"] = value;
+            }
+        }
     }
 }
