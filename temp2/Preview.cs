@@ -140,6 +140,14 @@ namespace Screen_Grab
                 imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(System.Text.Encoding.UTF8.GetString(e.Result));
                 var d = rd.data;
                 Clipboard.SetText(d.link);
+
+                var hashfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "delete_hashes.txt");
+                var output = "Link: " + d.link + " deletehash: https://imgur.com/delete/" + d.deletehash + "\r\n";
+                byte[] xz = System.Text.UTF8Encoding.UTF8.GetBytes(output);
+                using(var fd = new FileStream(hashfile, FileMode.Append)) {
+                    fd.Write(xz,0,xz.Length);
+                }
+
                 parent.Text = "Snap (" + d.link + ")";
                 this.Close();
             }
