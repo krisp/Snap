@@ -94,5 +94,17 @@ namespace Screen_Grab.Properties {
                 this["provider"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color penColor {
+            get {
+                return ((global::System.Drawing.Color)(this["penColor"]));
+            }
+            set {
+                this["penColor"] = value;
+            }
+        }
     }
 }

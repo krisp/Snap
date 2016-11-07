@@ -23,7 +23,8 @@ namespace Screen_Grab
         private bool drawObfuscate = false;
         private bool drawing = false;
         private Point lastPoint;
-        
+        private Color penColor = Color.Black;
+
         public Preview(Form2 p)
         {
             this.parent = p;
@@ -45,13 +46,59 @@ namespace Screen_Grab
 
         private void Preview_Load(object sender, EventArgs e)
         {
+            string[] colorsilike = {"Black","Red","Blue","Yellow","Green","Orange","Purple","Gray"};
+            int[] pensizes = { 1, 2, 4, 6, 8, 10, 14, 20 };
             pbImg.Image = Clipboard.GetImage();
             pbImg.Size = Clipboard.GetImage().Size;
             this.Size = new Size(pbImg.Size.Width + 20 , pbImg.Size.Height + 70);
+
+            foreach (var color in colorsilike)
+            {
+                ToolStripItem x = new ToolStripMenuItem(color);
+                x.Click += new System.EventHandler(x_Click);
+                penMenu.DropDownItems.Add(x);
+            }
+
+            ToolStripItem y = new ToolStripMenuItem("Custom...");
+            y.Click += new System.EventHandler(y_Click);
+            penMenu.DropDownItems.Add(y);
+            penColor = Properties.Settings.Default.penColor;
+
+            if (penColor.IsNamedColor) 
+            {
+                penMenu.Text = "Pen: " + penColor.ToKnownColor().ToString();
+            }
+            else
+            {
+                penMenu.Text = "Pen: Custom";
+            }
+        }
+
+        void x_Click(object sender, EventArgs e)
+        {
+            penMenu.Text = "Pen: " + sender.ToString();
+            penColor = Color.FromName(sender.ToString());
+            drawObfuscate = true;
+            pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
+        }
+
+        void y_Click(object sender, EventArgs e)
+        {
+            ColorDialog c = new ColorDialog();
+            c.Color = penColor;
+            if (c.ShowDialog() == DialogResult.OK)
+            {
+                penColor = c.Color;
+                penMenu.Text = "Pen: Custom";
+                drawObfuscate = true;
+                pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
+            }            
         }
 
         private void Preview_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Properties.Settings.Default.penColor = penColor;
+            Properties.Settings.Default.Save();
             parent.Visible = true;
         }
 
@@ -64,7 +111,10 @@ namespace Screen_Grab
         {
             if (e.KeyChar == 27)
             {
-                this.Close();
+                if (drawObfuscate)
+                    drawObfuscate = false;
+                else
+                    this.Close();
             }
         }
 
@@ -175,6 +225,7 @@ namespace Screen_Grab
 
         private void drawObfuscationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            drawObfuscationToolStripMenuItem.Checked = true;
             drawObfuscate = true;            
             pbImg.Cursor = System.Windows.Forms.Cursors.Hand;
         }
@@ -193,7 +244,7 @@ namespace Screen_Grab
             if(drawing && lastPoint != null)
             {
                 using (Graphics g = Graphics.FromImage(pbImg.Image))                          
-                    g.DrawLine(new Pen(Brushes.Black, 6), lastPoint, e.Location);
+                    g.DrawLine(new Pen(penColor, 6), lastPoint, e.Location);
                 
                 pbImg.Invalidate();
                 lastPoint = e.Location;           
@@ -208,6 +259,7 @@ namespace Screen_Grab
                 drawObfuscate = false;
                 lastPoint = Point.Empty;
                 pbImg.Cursor = Cursors.Default;
+                drawObfuscationToolStripMenuItem.Checked = false;
             }
         }
 

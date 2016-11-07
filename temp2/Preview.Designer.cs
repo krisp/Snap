@@ -32,8 +32,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelESCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drawObfuscationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.penMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelESCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pbImg)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,8 +55,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.saveToDiskToolStripMenuItem,
-            this.cancelESCToolStripMenuItem,
-            this.drawObfuscationToolStripMenuItem});
+            this.drawObfuscationToolStripMenuItem,
+            this.penMenu,
+            this.cancelESCToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -76,19 +78,25 @@
             this.saveToDiskToolStripMenuItem.Text = "Save to Disk";
             this.saveToDiskToolStripMenuItem.Click += new System.EventHandler(this.saveToDiskToolStripMenuItem_Click);
             // 
+            // drawObfuscationToolStripMenuItem
+            // 
+            this.drawObfuscationToolStripMenuItem.Name = "drawObfuscationToolStripMenuItem";
+            this.drawObfuscationToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.drawObfuscationToolStripMenuItem.Text = "Draw";
+            this.drawObfuscationToolStripMenuItem.Click += new System.EventHandler(this.drawObfuscationToolStripMenuItem_Click);
+            // 
+            // penMenu
+            // 
+            this.penMenu.Name = "penMenu";
+            this.penMenu.Size = new System.Drawing.Size(73, 20);
+            this.penMenu.Text = "Pen: Black";
+            // 
             // cancelESCToolStripMenuItem
             // 
             this.cancelESCToolStripMenuItem.Name = "cancelESCToolStripMenuItem";
             this.cancelESCToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.cancelESCToolStripMenuItem.Text = "Cancel (ESC)";
             this.cancelESCToolStripMenuItem.Click += new System.EventHandler(this.cancelESCToolStripMenuItem_Click);
-            // 
-            // drawObfuscationToolStripMenuItem
-            // 
-            this.drawObfuscationToolStripMenuItem.Name = "drawObfuscationToolStripMenuItem";
-            this.drawObfuscationToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
-            this.drawObfuscationToolStripMenuItem.Text = "Draw Obfuscation";
-            this.drawObfuscationToolStripMenuItem.Click += new System.EventHandler(this.drawObfuscationToolStripMenuItem_Click);
             // 
             // Preview
             // 
@@ -120,5 +128,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveToDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cancelESCToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drawObfuscationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem penMenu;
     }
 }

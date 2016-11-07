@@ -34,7 +34,7 @@ namespace Screen_Grab
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(114, 3);
+            this.button1.Location = new System.Drawing.Point(103, -1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 41);
             this.button1.TabIndex = 1;
@@ -45,7 +45,7 @@ namespace Screen_Grab
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(3, 3);
+            this.button2.Location = new System.Drawing.Point(-1, -1);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(105, 41);
             this.button2.TabIndex = 0;
@@ -68,7 +68,7 @@ namespace Screen_Grab
             // btnOptions
             // 
             this.btnOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnOptions.Location = new System.Drawing.Point(225, 3);
+            this.btnOptions.Location = new System.Drawing.Point(207, -1);
             this.btnOptions.Name = "btnOptions";
             this.btnOptions.Size = new System.Drawing.Size(105, 41);
             this.btnOptions.TabIndex = 4;
@@ -81,7 +81,7 @@ namespace Screen_Grab
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(334, 48);
+            this.ClientSize = new System.Drawing.Size(312, 39);
             this.Controls.Add(this.btnOptions);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
