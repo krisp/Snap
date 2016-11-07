@@ -10,7 +10,7 @@ namespace Screen_Grab
         int noofscreens = 0;
         Form1[] grabwindow;
         Screen[] screens;
-        RegistryKey key;
+     
         public Form2()
         {
             screens = Screen.AllScreens;

@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Specialized;
 using System.Net;
-
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace Screen_Grab
@@ -183,17 +183,16 @@ namespace Screen_Grab
         {
             try
             {
-                imgurRootObject rd = JsonConvert.DeserializeObject<imgurRootObject>(System.Text.Encoding.UTF8.GetString(e.Result));
-                var d = rd.data;
-                Clipboard.SetText(d.link);
+                JObject j = JObject.Parse(System.Text.Encoding.UTF8.GetString(e.Result));
+                Clipboard.SetText(j["data"]["link"].Value<string>());
 
                 var hashfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "delete_hashes.txt");
-                var output = "Link: " + d.link + " deletehash: https://imgur.com/delete/" + d.deletehash + "\r\n";
+                var output = "Link: " + j["data"]["link"].Value<string>() + " deletehash: https://imgur.com/delete/" + j["data"]["deletehash"].Value<string>() + "\r\n";
                 byte[] xz = System.Text.UTF8Encoding.UTF8.GetBytes(output);
                 using(var fd = new FileStream(hashfile, FileMode.Append))
-                    fd.Write(xz,0,xz.Length);               
+                    fd.Write(xz,0,xz.Length);
 
-                parent.Text = "Snap (" + d.link + ")";
+                parent.Text = "Snap (" + j["data"]["link"].Value<string>() + ")";
                 this.Close();
             }
             catch (Exception ex)
@@ -343,38 +342,5 @@ namespace Screen_Grab
             }
         }
 
-    }
-
-    public class imgurData
-    {
-        public string id { get; set; }
-        public object title { get; set; }
-        public object description { get; set; }
-        public int datetime { get; set; }
-        public string type { get; set; }
-        public bool animated { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
-        public int size { get; set; }
-        public int views { get; set; }
-        public int bandwidth { get; set; }
-        public object vote { get; set; }
-        public bool favorite { get; set; }
-        public object nsfw { get; set; }
-        public object section { get; set; }
-        public object account_url { get; set; }
-        public int account_id { get; set; }
-        public bool is_ad { get; set; }
-        public bool in_gallery { get; set; }
-        public string deletehash { get; set; }
-        public string name { get; set; }
-        public string link { get; set; }
-    }
-
-    public class imgurRootObject
-    {
-        public imgurData data { get; set; }
-        public bool success { get; set; }
-        public int status { get; set; }
     }
 }
