@@ -56,7 +56,7 @@ namespace Screen_Grab
             foreach (var color in colorsilike)
             {
                 ToolStripMenuItem x = new ToolStripMenuItem(color);
-                x.Click += new System.EventHandler(x_Click);
+                x.Click += new System.EventHandler(color_Click);
                 x.Image = new Bitmap(32, 32);
                 using (Graphics g = Graphics.FromImage(x.Image))
                 {
@@ -77,7 +77,7 @@ namespace Screen_Grab
             }
 
             ToolStripItem y = new ToolStripMenuItem("Custom...");
-            y.Click += new System.EventHandler(y_Click);
+            y.Click += new System.EventHandler(customColor_Click);
             tsddColors.DropDownItems.Add(y);
 
             tsddSize.Text = "Size: " + penSize.ToString();
@@ -114,7 +114,7 @@ namespace Screen_Grab
             tsddColors.Invalidate();
         }
 
-        void x_Click(object sender, EventArgs e)
+        void color_Click(object sender, EventArgs e)
         {           
             penColor = Color.FromName(sender.ToString());
             tsDraw.Checked = true;
@@ -130,7 +130,7 @@ namespace Screen_Grab
             redrawSizeMenu();
         }
 
-        void y_Click(object sender, EventArgs e)
+        void customColor_Click(object sender, EventArgs e)
         {
             ColorDialog c = new ColorDialog();
             c.Color = penColor;
@@ -184,10 +184,12 @@ namespace Screen_Grab
             try
             {
                 JObject j = JObject.Parse(System.Text.Encoding.UTF8.GetString(e.Result));
-                Clipboard.SetText(j["data"]["link"].Value<string>());
+                string link = j["data"]["link"].Value<string>();
+                string deletehash = j["data"]["deletehash"].Value<string>();
+                Clipboard.SetText(link);
 
                 var hashfile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "delete_hashes.txt");
-                var output = "Link: " + j["data"]["link"].Value<string>() + " deletehash: https://imgur.com/delete/" + j["data"]["deletehash"].Value<string>() + "\r\n";
+                var output = "Link: " + link + " deletehash: https://imgur.com/delete/" + deletehash + "\r\n";
                 byte[] xz = System.Text.UTF8Encoding.UTF8.GetBytes(output);
                 using(var fd = new FileStream(hashfile, FileMode.Append))
                     fd.Write(xz,0,xz.Length);
@@ -201,7 +203,7 @@ namespace Screen_Grab
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void upload_Click(object sender, EventArgs e)
         {            
             MemoryStream ms = new MemoryStream();
             pbImg.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
@@ -337,7 +339,6 @@ namespace Screen_Grab
                 drawObfuscate = false;
                 lastPoint = Point.Empty;
                 pbImg.Cursor = Cursors.Default;
-                drawObfuscationToolStripMenuItem.Checked = false;
                 tsDraw.Checked = false;
             }
         }
