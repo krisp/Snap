@@ -272,7 +272,7 @@ namespace Screen_Grab
 
                         try
                         {
-                            w.UploadValuesAsync(new Uri("https://api.imgur.com/3/image"), "POST", vals);
+                            w.UploadValuesAsync(new Uri(Properties.Settings.Default.apikey), "POST", vals);
                             pbUpload.Visible = true;
                         }
                         catch (Exception ex)
