@@ -202,7 +202,7 @@ namespace Screen_Grab
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error decoding link: " + ex.Message);
+                MessageBox.Show("Error decoding link: " + ex.InnerException.Message);
             }
         }
 
