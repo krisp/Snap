@@ -16,9 +16,9 @@ PORT = 9090
 class ImgSrv(object):
   @cherrypy.expose
   @cherrypy.tools.json_out()
-  @cherrypy.tools.json_in()
   @cherrypy.tools.accept(media="application/x-www-form-urlencoded")
-  def image(self):
+  def image(self, **kargs):
+   try:
     if(request.params["data"]):
     	imgbytes = base64.b64decode(request.params["data"])
 	hashids = Hashids(salt="cool salt brah")
@@ -30,6 +30,8 @@ class ImgSrv(object):
 	return result
     else:
         return {"data": {}, "result": "failure"}
+   except:
+    return {"data": {}, "result": "failure"}
 
-cherrypy.config.update({'server.socket_port': PORT, 'server.socket_host': '0.0.0.0', 'tools.json_in.force': False})
+cherrypy.config.update({'server.socket_port': PORT, 'server.socket_host': '0.0.0.0'})
 cherrypy.quickstart(ImgSrv())
