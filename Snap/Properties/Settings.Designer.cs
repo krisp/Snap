@@ -118,5 +118,53 @@ namespace Screen_Grab.Properties {
                 this["penSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool announce {
+            get {
+                return ((bool)(this["announce"]));
+            }
+            set {
+                this["announce"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string announceuri {
+            get {
+                return ((string)(this["announceuri"]));
+            }
+            set {
+                this["announceuri"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string announceauthor {
+            get {
+                return ((string)(this["announceauthor"]));
+            }
+            set {
+                this["announceauthor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string announcechannel {
+            get {
+                return ((string)(this["announcechannel"]));
+            }
+            set {
+                this["announcechannel"] = value;
+            }
+        }
     }
 }

@@ -48,10 +48,16 @@ namespace Screen_Grab
 
         private void Options_Load(object sender, EventArgs e)
         {
+            
             cbUploadEnabled.Checked = Properties.Settings.Default.uploadEnabled;
             tbAPIkey.Text = Properties.Settings.Default.apikey;
             //cbPreview.Checked = Properties.Settings.Default.preview;
             imgProvider = Properties.Settings.Default.provider;
+            cbAnnounceEnabled.Checked = Properties.Settings.Default.announce;
+            tbAnnounceURI.Text = Properties.Settings.Default.announceuri;
+            tbAuthor.Text = Properties.Settings.Default.announceauthor;
+            tbChannel.Text = Properties.Settings.Default.announcechannel;
+
             if (imgProvider == (int)ImgProviders.imgur)
                 rbImgur.Checked = true;
             else if (imgProvider == (int)ImgProviders.slimg)
@@ -87,6 +93,10 @@ namespace Screen_Grab
             Properties.Settings.Default.apikey = tbAPIkey.Text;
             Properties.Settings.Default.preview = true;
             Properties.Settings.Default.provider = imgProvider;
+            Properties.Settings.Default.announce = cbAnnounceEnabled.Checked;
+            Properties.Settings.Default.announceuri = tbAnnounceURI.Text;
+            Properties.Settings.Default.announcechannel = tbChannel.Text;
+            Properties.Settings.Default.announceauthor = tbAuthor.Text;
             Properties.Settings.Default.Save();
         }
     }

@@ -198,6 +198,24 @@ namespace Screen_Grab
                     fd.Write(xz,0,xz.Length);
 
                 parent.Text = "Snap (" + j["data"]["link"].Value<string>() + ")";
+
+                if(Properties.Settings.Default.announce == true && Properties.Settings.Default.announceuri.Length > 0)
+                {
+                    try
+                    {
+                        using(var w = new WebClient())
+                        {
+                            w.UploadValuesAsync(new Uri(Properties.Settings.Default.announceuri), new NameValueCollection{
+                                {"uri", link}, {"author", Properties.Settings.Default.announceauthor}, {"channel", Properties.Settings.Default.announcechannel}
+                            });
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
                 this.Close();
             }
             catch (Exception ex)

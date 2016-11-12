@@ -37,9 +37,18 @@
             this.rbSlimg = new System.Windows.Forms.RadioButton();
             this.cbUploadEnabled = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbAnnounceEnabled = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbAnnounceURI = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbAuthor = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbChannel = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbImgProvider.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -133,7 +142,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(380, 163);
+            this.button1.Location = new System.Drawing.Point(380, 284);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -141,11 +150,86 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tbChannel);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.tbAuthor);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.tbAnnounceURI);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.cbAnnounceEnabled);
+            this.groupBox2.Location = new System.Drawing.Point(14, 164);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(441, 114);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Urlbot Announcement";
+            // 
+            // cbAnnounceEnabled
+            // 
+            this.cbAnnounceEnabled.AutoSize = true;
+            this.cbAnnounceEnabled.Location = new System.Drawing.Point(13, 20);
+            this.cbAnnounceEnabled.Name = "cbAnnounceEnabled";
+            this.cbAnnounceEnabled.Size = new System.Drawing.Size(65, 17);
+            this.cbAnnounceEnabled.TabIndex = 0;
+            this.cbAnnounceEnabled.Text = "Enabled";
+            this.cbAnnounceEnabled.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "URI:";
+            // 
+            // tbAnnounceURI
+            // 
+            this.tbAnnounceURI.Location = new System.Drawing.Point(49, 41);
+            this.tbAnnounceURI.Name = "tbAnnounceURI";
+            this.tbAnnounceURI.Size = new System.Drawing.Size(356, 20);
+            this.tbAnnounceURI.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(97, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Author:";
+            // 
+            // tbAuthor
+            // 
+            this.tbAuthor.Location = new System.Drawing.Point(144, 71);
+            this.tbAuthor.Name = "tbAuthor";
+            this.tbAuthor.Size = new System.Drawing.Size(100, 20);
+            this.tbAuthor.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(250, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Channel:";
+            // 
+            // tbChannel
+            // 
+            this.tbChannel.Location = new System.Drawing.Point(305, 71);
+            this.tbChannel.Name = "tbChannel";
+            this.tbChannel.Size = new System.Drawing.Size(100, 20);
+            this.tbChannel.TabIndex = 6;
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 195);
+            this.ClientSize = new System.Drawing.Size(473, 319);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Options";
@@ -158,6 +242,8 @@
             this.gbImgProvider.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -173,5 +259,13 @@
         private System.Windows.Forms.RadioButton rbSlimg;
         private System.Windows.Forms.CheckBox cbUploadEnabled;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox tbAnnounceURI;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cbAnnounceEnabled;
+        private System.Windows.Forms.TextBox tbChannel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbAuthor;
+        private System.Windows.Forms.Label label2;
     }
 }
